@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lookandmove"
+version = "1.0.0"
+description = "Image-based visual servoing (dynamic look-and-move) of a 6-DoF arm: pinhole camera, template matching, hand-eye calibration and a stability analysis of calibration errors."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.23", "matplotlib>=3.7", "pillow>=9.1"]
+keywords = ["robotics", "visual-servoing", "computer-vision", "camera-calibration", "template-matching", "control"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "ruff>=0.6,<0.17"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["slow: runs the full render + template-matching pipeline"]
+
+[tool.ruff]
+line-length = 130
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]
+ignore = ["E741"]
